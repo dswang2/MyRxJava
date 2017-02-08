@@ -34,19 +34,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_myrxjava:
                 //maptest();
                 //maptest2();
-                maptest3();
+                //maptest3();
+                maptest4();
                 break;
         }
     }
 
+    private void maptest4() {
+        Observable<Integer> observable = Observable.just(110);
+        //被观察者observable调用map方法进行转换，得到新的被观察者，observable2
+        //新的被观察者 observable2  发送的是 Observable<User>类型，这个Integer 到 Observable<User>的转换
+        //新的被观察者observable2 的发送数据Observable<User>，发送给观察者
+        /*
+        Observable<Observable<User>> observable2 = observable.map(new Function<Integer, Observable<User>>() {
+            @Override
+            public Observable<User> apply(Integer integer) throws Exception {
+                return  Observable<User> 类型数据;
+            }
+        });
+        */
+    }
+
     private void maptest3() {
-        
+        Observable<Integer> observable = Observable.just(110);
+        //被观察者observable调用map方法进行转换，得到新的被观察者，observable2
+        //新的被观察者 observable2  发送的是 User类型，这个Integer 到 User的转换，实际上就是一次网络访问
+        //网络访问的结果，作为新的被观察者observable2 的发送数据，发送给观察者，更新UI界面
+        /*
+        Observable<User> observable2 = observable.map(new Function<Integer, User>() {
+            @Override
+            public User apply(Integer integer) throws Exception {
+                return api.getUserInfoWithPath(integer).excute().body();
+            }
+        });
+        */
+        //当然，其中的User是假设存在的，api也是假设存在的一个网络访问接口，网络访问得到的数据转换为User类型
+        /*
+        observable2.subscribe(new Consumer<User>() {
+            @Override
+            public void accept(User user) throws Exception {
+                //根据网络访问到的数据User，更新ui等
+            }
+        });
+        */
     }
 
     private void maptest2() {
         Observable<Integer> observable = Observable.just(110);
         //被观察者observable调用map方法进行转换，得到新的被观察者，observable2
-        //新的被观察者 observable2  接收字符类型数据
+        //新的被观察者 observable2  发送字符类型数据
         Observable<String> observable2 = observable.map(new Function<Integer, String>() {
             @Override
             public String apply(Integer integer) throws Exception {
@@ -66,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //被观察者observable 接收整型数据110
         Observable<Integer> observable = Observable.just(110);
         //被观察者observable调用map方法进行转换，得到新的被观察者，observable2
-        //新的被观察者 observable2  接收字符类型数据
+        //新的被观察者 observable2  发送字符类型数据
         Observable<String> observable2 = observable.map(new Function<Integer, String>() {
             @Override
             public String apply(Integer integer) throws Exception {
