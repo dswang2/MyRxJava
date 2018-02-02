@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
         // 测试提交：第一次提交
+        // 测试提交：第二次提交
     }
 
     private void initView() {
